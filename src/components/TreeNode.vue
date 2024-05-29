@@ -7,6 +7,7 @@ import type { INode } from "@/types/treeNode";
 const props = defineProps<{
   node: INode;
   nodes: INode[];
+  level: number;
 }>();
 
 const isOpen = ref(false);
@@ -26,33 +27,40 @@ const isRoot = computed(() => {
 </script>
 
 <template>
-  <li>
+  <section>
     <div
       @click="toggle"
       :class="[
         'cursor-pointer py-1 px-2 flex justify-between items-center w-full',
-        isRoot ? 'bg-gray-300' : isOpen ? 'bg-gray-100' : 'bg-gray-200',
+        isRoot ? 'bg-gray-400' : isOpen || children.length === 0 ? 'bg-gray-100' : 'bg-gray-300',
       ]"
     >
-      <TreeNodeTitle
-        :title="node.title"
-        :has-children="children.length"
-        :is-open="isOpen"
-      />
+      <div
+        :style="{
+          paddingLeft: `${level * 20}px`, // Вычисляем отступы в зависимости от уровня вложенности
+        }"
+      >
+        <TreeNodeTitle
+          :title="node.title"
+          :has-children="children.length"
+          :is-open="isOpen"
+        />
+      </div>
     </div>
-    <ul v-if="isOpen" class="pl-5">
+    <div v-if="isOpen">
       <TreeNode
         v-for="child in children"
         :key="child.id"
         :node="child"
         :nodes="nodes"
+        :level="level + 1"
       />
-  </ul>
-  </li>
+    </div>
+  </section>
 </template>
 
 <style scoped>
-li {
+section {
   list-style-type: none;
 }
 </style>

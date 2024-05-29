@@ -4,7 +4,7 @@
       <img :src="isOpen ? expandedIcon : collapsedIcon" alt="arrow" class="w-[15px] h-[15px]">
     </span>
     <span v-else class="mr-2 text-gray-700 text-2xl">-</span>
-    {{ title }} {{ hasChildren }}
+    {{ title }}
   </div>
 </template>
 
