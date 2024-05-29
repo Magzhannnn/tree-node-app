@@ -31,7 +31,7 @@ const isRoot = computed(() => {
       @click="toggle"
       :class="[
         'cursor-pointer py-1 px-2 flex justify-between items-center w-full',
-        isRoot ? 'bg-gray-300' : isOpen ? 'bg-gray-200' : 'bg-gray-100',
+        isRoot ? 'bg-gray-300' : isOpen ? 'bg-gray-100' : 'bg-gray-200',
       ]"
     >
       <TreeNodeTitle
